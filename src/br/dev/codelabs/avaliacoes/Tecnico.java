@@ -59,8 +59,12 @@ public class Tecnico extends Avaliacao {
 				stm.setLong(2, this.Aluno);
 				ResultSet busca = stm.executeQuery();
 				String aluno = "";
+				String tipo = "";
+				Long alunoId = null;
 				while(busca.next()) {
 					aluno = busca.getString(7);
+					tipo = busca.getString(1);
+					alunoId = busca.getLong(6);
 					if(busca.getDouble(8) >= this.Media) {
 						resultado += "TIPO: " + busca.getString(1) + " | CURSO: " + busca.getString(3) + " | MATERIA: " + busca.getString(5) + " | ALUNO: " + busca.getString(7) + " | NOTA: " + busca.getDouble(8) + " | STATUS: Aprovado(a)\n";
 						stm = Conexao.prepareStatement("UPDATE avaliacoes SET Status = 'Aprovado(a)' WHERE Curso = ? AND Materia = ? AND Aluno = ?");
@@ -75,6 +79,12 @@ public class Tecnico extends Avaliacao {
 						stm.setLong(2, busca.getLong(4));
 						stm.setLong(3, busca.getLong(6));
 					}
+					stm.execute();
+				}
+				if(statusGeral.equalsIgnoreCase("APROVADO(A)")) {
+					stm = Conexao.prepareStatement("INSERT INTO certificados (Tipo, Aluno) VALUES (?,?)");
+					stm.setString(1, tipo);
+					stm.setLong(2, alunoId);
 					stm.execute();
 				}
 				return "STATUS---> SUCESSO... (Aluno(a) " + aluno + " está " + statusGeral + ")\n" + resultado;

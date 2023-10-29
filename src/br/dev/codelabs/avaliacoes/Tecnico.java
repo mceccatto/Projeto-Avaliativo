@@ -60,10 +60,12 @@ public class Tecnico extends Avaliacao {
 				ResultSet busca = stm.executeQuery();
 				String aluno = "";
 				String tipo = "";
+				Long cursoId = null;
 				Long alunoId = null;
 				while(busca.next()) {
 					aluno = busca.getString(7);
 					tipo = busca.getString(1);
+					cursoId = busca.getLong(2);
 					alunoId = busca.getLong(6);
 					if(busca.getDouble(8) >= this.Media) {
 						resultado += "TIPO: " + busca.getString(1) + " | CURSO: " + busca.getString(3) + " | MATERIA: " + busca.getString(5) + " | ALUNO: " + busca.getString(7) + " | NOTA: " + busca.getDouble(8) + " | STATUS: Aprovado(a)\n";
@@ -82,9 +84,10 @@ public class Tecnico extends Avaliacao {
 					stm.execute();
 				}
 				if(statusGeral.equalsIgnoreCase("APROVADO(A)")) {
-					stm = Conexao.prepareStatement("INSERT INTO certificados (Tipo, Aluno) VALUES (?,?)");
+					stm = Conexao.prepareStatement("INSERT INTO certificados (Tipo, Curso, Aluno) VALUES (?,?,?)");
 					stm.setString(1, tipo);
-					stm.setLong(2, alunoId);
+					stm.setLong(2, cursoId);
+					stm.setLong(3, alunoId);
 					stm.execute();
 				}
 				return "STATUS---> SUCESSO... (Aluno(a) " + aluno + " está " + statusGeral + ")\n" + resultado;

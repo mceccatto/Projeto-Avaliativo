@@ -14,10 +14,11 @@ public class Limpar {
 		Connection conexao = ConexaoMYSQL.getConexaoMYSQL();
 		PreparedStatement stm = null;
 		try {
-		//SELECT Concat('TRUNCATE TABLE ', TABLE_NAME) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'universidade'
 		stm = conexao.prepareStatement("TRUNCATE TABLE alunos");
 		stm.execute();
 		stm = conexao.prepareStatement("TRUNCATE TABLE avaliacoes");
+		stm.execute();
+		stm = conexao.prepareStatement("TRUNCATE TABLE certificados");
 		stm.execute();
 		System.out.println("STATUS---> SUCESSO... (Tabelas limpas)\n");
 		} catch (SQLException e) {

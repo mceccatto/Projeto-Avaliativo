@@ -1,6 +1,9 @@
 package br.dev.codelabs.persistencias;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import br.dev.codelabs.alunos.Aluno;
 import br.dev.codelabs.alunos.iAluno;
@@ -11,6 +14,7 @@ import br.dev.codelabs.avaliacoes.Mestrado;
 import br.dev.codelabs.avaliacoes.iAvaliacao;
 import br.dev.codelabs.conexoes.ConexaoMYSQL;
 import br.dev.codelabs.fabricas.iFabrica;
+import br.dev.codelabs.matriculas.*;
 
 public class PersistenciaMYSQL implements iFabrica {
 	
@@ -25,6 +29,21 @@ public class PersistenciaMYSQL implements iFabrica {
 		System.out.println(aluno.registrar());
 		ConexaoMYSQL.fecharConexao();
 		return null;
+	}
+	
+	@Override
+	public iMatricula novaMatricula(iMatricula Matricula, String Tipo) {
+		iMatricula matricula = Matricula;
+		if(Tipo.equalsIgnoreCase("Tecnico")) {
+			matricula = new TecnicoDec(matricula);
+		}
+		if(Tipo.equalsIgnoreCase("Bacharelado")) {
+			matricula = new BachareladoDec(matricula);
+		}
+		if(Tipo.equalsIgnoreCase("Mestrado")) {
+			matricula = new MestradoDec(matricula);
+		}
+		return matricula;
 	}
 	
 	@Override

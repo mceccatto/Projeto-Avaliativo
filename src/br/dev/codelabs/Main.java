@@ -1,37 +1,38 @@
 package br.dev.codelabs;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import br.dev.codelabs.alunos.iAluno;
 import br.dev.codelabs.avaliacoes.iAvaliacao;
 import br.dev.codelabs.fabricas.iFabrica;
+import br.dev.codelabs.matriculas.BachareladoDec;
+import br.dev.codelabs.matriculas.BasicDec;
+import br.dev.codelabs.matriculas.MestradoDec;
+import br.dev.codelabs.matriculas.TecnicoDec;
+import br.dev.codelabs.matriculas.iMatricula;
 import br.dev.codelabs.persistencias.Limpar;
 import br.dev.codelabs.persistencias.PersistenciaMYSQL;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
 		Limpar.limpar();
-		
 		iFabrica persistencia = new PersistenciaMYSQL();
-		
 		Universidade instituicao = new Universidade(persistencia);
 		
 		iAluno aluno1 = instituicao.novoAluno("00000000000", "Frederico", getDateTime());
 		System.out.println();
 		//CURSO / MATERIA / ALUNO / NOTA / HORARIO
-		iAvaliacao avaliacaoA11 = instituicao.novaAvaliacaoTecnico((long)1, (long)1, (long)1, 9.0, getDateTime());
-		iAvaliacao avaliacaoA12 = instituicao.novaAvaliacaoTecnico((long)1, (long)2, (long)1, 7.0, getDateTime());
-		iAvaliacao avaliacaoA13 = instituicao.novaAvaliacaoTecnico((long)1, (long)3, (long)1, 6.9, getDateTime());
-		iAvaliacao avaliacaoA14 = instituicao.novaAvaliacaoTecnico((long)1, (long)4, (long)1, 8.5, getDateTime());
-		iAvaliacao avaliacaoA15 = instituicao.novaAvaliacaoTecnico((long)1, (long)5, (long)1, 9.9, getDateTime());
+		iAvaliacao aluno1A1 = instituicao.novaAvaliacaoTecnico((long)1, (long)1, (long)1, 9.0, getDateTime());
+		iAvaliacao aluno1A2 = instituicao.novaAvaliacaoTecnico((long)1, (long)2, (long)1, 7.0, getDateTime());
+		iAvaliacao aluno1A3 = instituicao.novaAvaliacaoTecnico((long)1, (long)3, (long)1, 6.9, getDateTime());
+		iAvaliacao aluno1A4 = instituicao.novaAvaliacaoTecnico((long)1, (long)4, (long)1, 8.5, getDateTime());
+		iAvaliacao aluno1A5 = instituicao.novaAvaliacaoTecnico((long)1, (long)5, (long)1, 9.9, getDateTime());
 		System.out.println();
 		//CURSO / ALUNO
-		iAvaliacao checagemA11 = instituicao.checarAvaliacaoTecnico((long)1, (long)1);
+		iAvaliacao aluno1C1 = instituicao.checarAvaliacaoTecnico((long)1, (long)1);
+		
 		
 		iAluno aluno2 = instituicao.novoAluno("11111111111", "Alice", getDateTime());
 		System.out.println();
@@ -45,6 +46,7 @@ public class Main {
 		//CURSO / ALUNO
 		iAvaliacao checagemA21 = instituicao.checarAvaliacaoBacharelado((long)2, (long)2);
 		
+		
 		iAluno aluno3 = instituicao.novoAluno("22222222222", "Pedro", getDateTime());
 		System.out.println();
 		//CURSO / MATERIA / ALUNO / CONCEITO / HORARIO
@@ -57,23 +59,17 @@ public class Main {
 		//CURSO / ALUNO
 		iAvaliacao checagemA31 = instituicao.checarAvaliacaoMestrado((long)3, (long)3);
 		
-		/*
-		try {
-			stm = Conexao.prepareStatement("SELECT A.Id AS MatriculaId, A.Tipo AS Tipo, A.Curso AS CursoId, C.Nome AS CursoNome, A.Aluno AS AlunoId, D.Nome AS AlunoNome, B.Id AS CertificadoId FROM matriculas A LEFT JOIN certificados B ON B.Aluno = A.Aluno LEFT JOIN cursos C ON C.Id = A.Curso LEFT JOIN alunos D ON D.Id = A.Aluno WHERE A.Aluno = ?");
-			stm.setLong(1, this.Aluno);
-			ResultSet busca = stm.executeQuery();
-			while(busca.next()) {
-				xxx
-			}
-		} catch (SQLException e) {
-			return "STATUS---> FALHA... (" + e.getMessage() + ")";
-		} catch (Exception e) {
-			return "STATUS---> FALHA... (" + e.getMessage() + ")";
-		}
-		*/
 		
+		//EXECUTANDO MATRICULA COM DECORATOR
+		iMatricula matriculaA41 = new BasicDec();
+		matriculaA41 = instituicao.novaMatricula(matriculaA41, "Tecnico");
+		System.out.println(matriculaA41.matricular());
+		matriculaA41 = instituicao.novaMatricula(matriculaA41, "Bacharelado");
+		System.out.println(matriculaA41.matricular());
+		matriculaA41 = instituicao.novaMatricula(matriculaA41, "Mestrado");
+		System.out.println(matriculaA41.matricular());
 	}
-	
+
 	public static String getDateTime() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 	}

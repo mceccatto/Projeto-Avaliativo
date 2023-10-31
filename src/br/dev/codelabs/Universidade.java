@@ -3,6 +3,7 @@ package br.dev.codelabs;
 import br.dev.codelabs.alunos.iAluno;
 import br.dev.codelabs.avaliacoes.iAvaliacao;
 import br.dev.codelabs.fabricas.iFabrica;
+import br.dev.codelabs.matriculas.iMatricula;
 
 public class Universidade {
 	
@@ -15,6 +16,10 @@ public class Universidade {
 	public iAluno novoAluno(String Cpf, String Nome, String DataRegistro) {
         return persistencia.novoAluno(Cpf, Nome, DataRegistro);
     }
+	
+	public iMatricula novaMatricula(iMatricula Matricula, String Tipo) {
+		return persistencia.novaMatricula(Matricula, Tipo);
+	}
 	
 	public iAvaliacao novaAvaliacaoTecnico(Long Curso, Long Materia, Long Aluno, double Nota, String DataRegistro) {
         return persistencia.novaAvaliacaoTecnico(Curso, Materia, Aluno, Nota, DataRegistro);

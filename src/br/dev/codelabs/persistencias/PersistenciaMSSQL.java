@@ -11,6 +11,10 @@ import br.dev.codelabs.avaliacoes.Tecnico;
 import br.dev.codelabs.avaliacoes.iAvaliacao;
 import br.dev.codelabs.conexoes.ConexaoMYSQL;
 import br.dev.codelabs.fabricas.iFabrica;
+import br.dev.codelabs.matriculas.BachareladoDec;
+import br.dev.codelabs.matriculas.MestradoDec;
+import br.dev.codelabs.matriculas.TecnicoDec;
+import br.dev.codelabs.matriculas.iMatricula;
 
 public class PersistenciaMSSQL implements iFabrica {
 	
@@ -25,6 +29,21 @@ public class PersistenciaMSSQL implements iFabrica {
 		System.out.println(aluno.registrar());
 		ConexaoMYSQL.fecharConexao();
 		return null;
+	}
+	
+	@Override
+	public iMatricula novaMatricula(iMatricula Matricula, String Tipo) {
+		iMatricula matricula = Matricula;
+		if(Tipo.equalsIgnoreCase("Tecnico")) {
+			matricula = new TecnicoDec(matricula);
+		}
+		if(Tipo.equalsIgnoreCase("Bacharelado")) {
+			matricula = new BachareladoDec(matricula);
+		}
+		if(Tipo.equalsIgnoreCase("Mestrado")) {
+			matricula = new MestradoDec(matricula);
+		}
+		return matricula;
 	}
 	
 	@Override

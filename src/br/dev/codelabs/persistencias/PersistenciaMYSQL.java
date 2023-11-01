@@ -20,24 +20,6 @@ public class PersistenciaMYSQL implements iFabrica {
 		}
 		Connection conexao = ConexaoMYSQL.getConexaoMYSQL();
 		PreparedStatement stm = null;
-		try {
-			/*stm = conexao.prepareStatement("SET foreign_key_checks = 0");
-			stm.execute();
-			stm = conexao.prepareStatement("TRUNCATE TABLE alunos");
-			stm.execute();*/
-			stm = conexao.prepareStatement("TRUNCATE TABLE avaliacoes");
-			stm.execute();
-			stm = conexao.prepareStatement("TRUNCATE TABLE cursos");
-			stm.execute();
-			stm = conexao.prepareStatement("INSERT INTO cursos (Nome) VALUES('Curso Profissionalizante em Auxiliar Administrativo'),('Engenaharia de Software'),('Mestrado em Administração')");
-			stm.execute();
-			stm = conexao.prepareStatement("TRUNCATE TABLE materias");
-			stm.execute();
-			stm = conexao.prepareStatement("INSERT INTO materias (Nome) VALUES('Materia TEC 01'),('Materia TEC 02'),('Materia TEC 03'),('Materia TEC 04'),('Materia TEC 05'),('Materia BAC 01'),('Materia BAC 02'),('Materia BAC 03'),('Materia BAC 04'),('Materia BAC 05'),('Materia MES 01'),('Materia MES 02'),('Materia MES 03'),('Materia MES 04'),('Materia MES 05')");
-			stm.execute();
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
 		Aluno aluno = new Aluno(Cpf, Nome, DataRegistro, conexao);
 		System.out.println(aluno.registrar());
 		ConexaoMYSQL.fecharConexao();

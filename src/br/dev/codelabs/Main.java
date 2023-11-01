@@ -13,8 +13,9 @@ import br.dev.codelabs.persistencias.PersistenciaMYSQL;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		iFabrica persistencia = new PersistenciaMSSQL();
+		iFabrica persistencia = new PersistenciaMYSQL();
 		Universidade instituicao = new Universidade(persistencia);
 		
 		iAluno aluno1 = instituicao.novoAluno("00000000000", "Frederico", getDateTime());
@@ -58,6 +59,7 @@ public class Main {
 		
 		//EXECUTANDO MATRICULA COM DECORATOR
 		iMatricula matriculaA41 = new BasicDec();
+		System.out.println(matriculaA41.matricular());
 		matriculaA41 = instituicao.novaMatricula(matriculaA41, "Tecnico");
 		System.out.println(matriculaA41.matricular());
 		matriculaA41 = instituicao.novaMatricula(matriculaA41, "Bacharelado");

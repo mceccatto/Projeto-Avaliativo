@@ -21,8 +21,8 @@ public class PersistenciaMSSQL implements iFabrica {
 		Connection conexao = ConexaoMSSQL.getConexaoMSSQL();
 		PreparedStatement stm = null;
 		try {
-			stm = conexao.prepareStatement("TRUNCATE TABLE dbo.alunos");
-			stm.execute();
+			/*stm = conexao.prepareStatement("TRUNCATE TABLE dbo.alunos");
+			stm.execute();*/
 			stm = conexao.prepareStatement("TRUNCATE TABLE dbo.avaliacoes");
 			stm.execute();
 			stm = conexao.prepareStatement("TRUNCATE TABLE dbo.cursos");

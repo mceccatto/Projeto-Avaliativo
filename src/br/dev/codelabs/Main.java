@@ -14,7 +14,7 @@ import br.dev.codelabs.persistencias.PersistenciaMYSQL;
 public class Main {
 
 	public static void main(String[] args) {
-		iFabrica persistencia = new PersistenciaMYSQL();
+		iFabrica persistencia = new PersistenciaMSSQL();
 		Universidade instituicao = new Universidade(persistencia);
 		
 		iAluno aluno1 = instituicao.novoAluno("00000000000", "Frederico", getDateTime());

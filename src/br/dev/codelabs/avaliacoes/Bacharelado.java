@@ -83,13 +83,6 @@ public class Bacharelado extends Avaliacao {
 					}
 					stm.execute();
 				}
-				if(statusGeral.equalsIgnoreCase("APROVADO(A)") || statusGeral.equalsIgnoreCase("APROVADO(A) COM PENDÊNCIAS")) {
-					stm = Conexao.prepareStatement("INSERT INTO certificados (Tipo, Curso, Aluno) VALUES (?,?,?)");
-					stm.setString(1, tipo);
-					stm.setLong(2, cursoId);
-					stm.setLong(3, alunoId);
-					stm.execute();
-				}
 				return "STATUS---> SUCESSO... (Aluno(a) " + aluno + " está " + statusGeral + ")\n" + resultado;
 			} catch (SQLException e) {
 				return "STATUS---> FALHA... (" + e.getMessage() + ")";

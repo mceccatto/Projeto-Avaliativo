@@ -21,10 +21,10 @@ public class PersistenciaMYSQL implements iFabrica {
 		Connection conexao = ConexaoMYSQL.getConexaoMYSQL();
 		PreparedStatement stm = null;
 		try {
-			stm = conexao.prepareStatement("SET foreign_key_checks = 0");
+			/*stm = conexao.prepareStatement("SET foreign_key_checks = 0");
 			stm.execute();
 			stm = conexao.prepareStatement("TRUNCATE TABLE alunos");
-			stm.execute();
+			stm.execute();*/
 			stm = conexao.prepareStatement("TRUNCATE TABLE avaliacoes");
 			stm.execute();
 			stm = conexao.prepareStatement("TRUNCATE TABLE cursos");

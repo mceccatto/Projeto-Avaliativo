@@ -54,7 +54,7 @@ public class Bacharelado extends Avaliacao {
 			String resultado = "";
 			PreparedStatement stm = null;
 			try {
-				stm = Conexao.prepareStatement("SELECT A.Tipo AS Tipo, A.Curso AS CursoId, C.Nome AS CursoNome, A.Materia AS MateriaId, D.Nome AS MateriaNome, A.Aluno AS AlunoId, B.Nome AS AlunoNime, A.Nota AS Nota, A.Status AS STATUS FROM avaliacoes A JOIN alunos B ON B.Id = A.Aluno JOIN cursos C ON C.Id = A.Curso JOIN materias D ON D.Id = A.Materia WHERE A.Curso = ? AND A.Aluno = ?");
+				stm = Conexao.prepareStatement("SELECT A.Tipo AS Tipo, A.Curso AS CursoId, C.Nome AS CursoNome, A.Materia AS MateriaId, D.Nome AS MateriaNome, A.Aluno AS AlunoId, B.Nome AS AlunoNime, A.Nota AS Nota, A.Status AS STATUS FROM avaliacoes A LEFT JOIN alunos B ON B.Id = A.Aluno LEFT JOIN cursos C ON C.Id = A.Curso LEFT JOIN materias D ON D.Id = A.Materia WHERE A.Curso = ? AND A.Aluno = ?");
 				stm.setLong(1, this.Curso);
 				stm.setLong(2, this.Aluno);
 				ResultSet busca = stm.executeQuery();

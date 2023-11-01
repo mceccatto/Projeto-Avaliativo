@@ -6,18 +6,14 @@ import java.util.Calendar;
 import br.dev.codelabs.alunos.iAluno;
 import br.dev.codelabs.avaliacoes.iAvaliacao;
 import br.dev.codelabs.fabricas.iFabrica;
-import br.dev.codelabs.matriculas.BachareladoDec;
 import br.dev.codelabs.matriculas.BasicDec;
-import br.dev.codelabs.matriculas.MestradoDec;
-import br.dev.codelabs.matriculas.TecnicoDec;
 import br.dev.codelabs.matriculas.iMatricula;
-import br.dev.codelabs.persistencias.Limpar;
+import br.dev.codelabs.persistencias.PersistenciaMSSQL;
 import br.dev.codelabs.persistencias.PersistenciaMYSQL;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Limpar.limpar();
 		iFabrica persistencia = new PersistenciaMYSQL();
 		Universidade instituicao = new Universidade(persistencia);
 		
@@ -37,27 +33,27 @@ public class Main {
 		iAluno aluno2 = instituicao.novoAluno("11111111111", "Alice", getDateTime());
 		System.out.println();
 		//CURSO / MATERIA / ALUNO / NOTA / HORARIO
-		iAvaliacao avaliacaoA21 = instituicao.novaAvaliacaoBacharelado((long)2, (long)6, (long)2, 9.5, getDateTime());
-		iAvaliacao avaliacaoA22 = instituicao.novaAvaliacaoBacharelado((long)2, (long)7, (long)2, 8.3, getDateTime());
-		iAvaliacao avaliacaoA23 = instituicao.novaAvaliacaoBacharelado((long)2, (long)8, (long)2, 7.2, getDateTime());
-		iAvaliacao avaliacaoA24 = instituicao.novaAvaliacaoBacharelado((long)2, (long)9, (long)2, 5.8, getDateTime());
-		iAvaliacao avaliacaoA25 = instituicao.novaAvaliacaoBacharelado((long)2, (long)10, (long)2, 7.6, getDateTime());
+		iAvaliacao aluno2A1 = instituicao.novaAvaliacaoBacharelado((long)2, (long)6, (long)2, 9.5, getDateTime());
+		iAvaliacao aluno2A2 = instituicao.novaAvaliacaoBacharelado((long)2, (long)7, (long)2, 8.3, getDateTime());
+		iAvaliacao aluno2A3 = instituicao.novaAvaliacaoBacharelado((long)2, (long)8, (long)2, 7.2, getDateTime());
+		iAvaliacao aluno2A4 = instituicao.novaAvaliacaoBacharelado((long)2, (long)9, (long)2, 5.8, getDateTime());
+		iAvaliacao aluno2A5 = instituicao.novaAvaliacaoBacharelado((long)2, (long)10, (long)2, 7.6, getDateTime());
 		System.out.println();
 		//CURSO / ALUNO
-		iAvaliacao checagemA21 = instituicao.checarAvaliacaoBacharelado((long)2, (long)2);
+		iAvaliacao aluno2C1 = instituicao.checarAvaliacaoBacharelado((long)2, (long)2);
 		
 		
 		iAluno aluno3 = instituicao.novoAluno("22222222222", "Pedro", getDateTime());
 		System.out.println();
 		//CURSO / MATERIA / ALUNO / CONCEITO / HORARIO
-		iAvaliacao avaliacaoA31 = instituicao.novaAvaliacaoMestrado((long)3, (long)11, (long)3, "A", getDateTime());
-		iAvaliacao avaliacaoA32 = instituicao.novaAvaliacaoMestrado((long)3, (long)12, (long)3, "B", getDateTime());
-		iAvaliacao avaliacaoA33 = instituicao.novaAvaliacaoMestrado((long)3, (long)13, (long)3, "C", getDateTime());
-		iAvaliacao avaliacaoA34 = instituicao.novaAvaliacaoMestrado((long)3, (long)14, (long)3, "D", getDateTime());
-		iAvaliacao avaliacaoA35 = instituicao.novaAvaliacaoMestrado((long)3, (long)15, (long)3, "B", getDateTime());
+		iAvaliacao aluno3A1 = instituicao.novaAvaliacaoMestrado((long)3, (long)11, (long)3, "A", getDateTime());
+		iAvaliacao aluno3A2 = instituicao.novaAvaliacaoMestrado((long)3, (long)12, (long)3, "B", getDateTime());
+		iAvaliacao aluno3A3 = instituicao.novaAvaliacaoMestrado((long)3, (long)13, (long)3, "C", getDateTime());
+		iAvaliacao aluno3A4 = instituicao.novaAvaliacaoMestrado((long)3, (long)14, (long)3, "D", getDateTime());
+		iAvaliacao aluno3A5 = instituicao.novaAvaliacaoMestrado((long)3, (long)15, (long)3, "B", getDateTime());
 		System.out.println();
 		//CURSO / ALUNO
-		iAvaliacao checagemA31 = instituicao.checarAvaliacaoMestrado((long)3, (long)3);
+		iAvaliacao aluno3C1 = instituicao.checarAvaliacaoMestrado((long)3, (long)3);
 		
 		
 		//EXECUTANDO MATRICULA COM DECORATOR

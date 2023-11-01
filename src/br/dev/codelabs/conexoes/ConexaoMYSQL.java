@@ -13,7 +13,7 @@ public class ConexaoMYSQL {
 	static final String USERNAME = "root";
 	static final String PASSWORD = "root";
 
-	public static java.sql.Connection getConexaoMYSQL(){
+	public static Connection getConexaoMYSQL(){
 		Connection conexao = null;
 		try {
 			String driver = "com.mysql.cj.jdbc.Driver";

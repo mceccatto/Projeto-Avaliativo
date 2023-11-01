@@ -2,16 +2,10 @@ package br.dev.codelabs.persistencias;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.dev.codelabs.alunos.Aluno;
-import br.dev.codelabs.alunos.iAluno;
-import br.dev.codelabs.avaliacoes.Avaliacao;
-import br.dev.codelabs.avaliacoes.Tecnico;
-import br.dev.codelabs.avaliacoes.Bacharelado;
-import br.dev.codelabs.avaliacoes.Mestrado;
-import br.dev.codelabs.avaliacoes.iAvaliacao;
+import br.dev.codelabs.alunos.*;
+import br.dev.codelabs.avaliacoes.*;
 import br.dev.codelabs.conexoes.ConexaoMYSQL;
 import br.dev.codelabs.fabricas.iFabrica;
 import br.dev.codelabs.matriculas.*;
@@ -25,6 +19,25 @@ public class PersistenciaMYSQL implements iFabrica {
 			return null;
 		}
 		Connection conexao = ConexaoMYSQL.getConexaoMYSQL();
+		PreparedStatement stm = null;
+		try {
+			stm = conexao.prepareStatement("SET foreign_key_checks = 0");
+			stm.execute();
+			stm = conexao.prepareStatement("TRUNCATE TABLE alunos");
+			stm.execute();
+			stm = conexao.prepareStatement("TRUNCATE TABLE avaliacoes");
+			stm.execute();
+			stm = conexao.prepareStatement("TRUNCATE TABLE cursos");
+			stm.execute();
+			stm = conexao.prepareStatement("INSERT INTO cursos (Nome) VALUES('Curso Profissionalizante em Auxiliar Administrativo'),('Engenaharia de Software'),('Mestrado em Administração')");
+			stm.execute();
+			stm = conexao.prepareStatement("TRUNCATE TABLE materias");
+			stm.execute();
+			stm = conexao.prepareStatement("INSERT INTO materias (Nome) VALUES('Materia TEC 01'),('Materia TEC 02'),('Materia TEC 03'),('Materia TEC 04'),('Materia TEC 05'),('Materia BAC 01'),('Materia BAC 02'),('Materia BAC 03'),('Materia BAC 04'),('Materia BAC 05'),('Materia MES 01'),('Materia MES 02'),('Materia MES 03'),('Materia MES 04'),('Materia MES 05')");
+			stm.execute();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 		Aluno aluno = new Aluno(Cpf, Nome, DataRegistro, conexao);
 		System.out.println(aluno.registrar());
 		ConexaoMYSQL.fecharConexao();

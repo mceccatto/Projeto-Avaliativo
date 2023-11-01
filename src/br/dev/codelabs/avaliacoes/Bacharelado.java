@@ -74,7 +74,7 @@ public class Bacharelado extends Avaliacao {
 						stm.setLong(2, busca.getLong(4));
 						stm.setLong(3, busca.getLong(6));
 					} else {
-						statusGeral = "APROVADO(A) COM PENDÊNCIAS";
+						statusGeral = "APROVADO(A) COM PENDÊNCIA(S)";
 						resultado += "TIPO: " + busca.getString(1) + " | CURSO: " + busca.getString(3) + " | MATERIA: " + busca.getString(5) + " | ALUNO: " + busca.getString(7) + " | NOTA: " + busca.getDouble(8) + " | STATUS: Reprovado(a)\n";
 						stm = Conexao.prepareStatement("UPDATE avaliacoes SET Status = 'Reprovado(a)' WHERE Curso = ? AND Materia = ? AND Aluno = ?");
 						stm.setLong(1, busca.getLong(2));
